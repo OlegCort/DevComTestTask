@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="../Style/style.css">
+    <meta charset="UTF-8">
+    <title>Playground</title>
+
+
+</head>
+<body>
+
+<h1>Pazzles</h1>
+
+
+<th:block th:include="Field.html"></th:block>
+<th:block th:include="Pieces.html"></th:block>
+
+<button>
+<a href = "/playground/rotate">rotate</a>
+</button>
+<br>
+<br>
+<br>
+
+<label th:text="${status}"></label>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+body {
+    margin: auto;
+    width: 640px;
+    padding: 50px;
+    font-family: "Andale Mono", monospace;
+    color: #2E475D;
+    box-sizing: border-box;
+
+}
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Priority Styles */
+.priority-low {
+    color: green;
+    font-weight: bold;
+}
+
+.priority-medium {
+    color: orange;
+    font-weight: bold;
+}
+
+.priority-high {
+    color: red;
+    font-weight: bold;
+}
+
+/* Other Styles */
+h2 {
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+table, th, td{
+    border: 1px solid;
+}
+
+
+ .rotated {
+     -webkit-transform: rotate(45deg);
+     -moz-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     -o-transform: rotate(45deg);
+     transform: rotate(45deg);
+ }

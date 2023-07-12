@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="../Style/style.css">
+    <meta charset="UTF-8">
+    <title>Field</title>
+    <style>
+        .rotated {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+<table>
+  <tbody>
+    <tr th:each="row : ${#numbers.sequence(1, y)}">
+      <td th:each="column : ${#numbers.sequence(1, x)}">
+        <a th:if="${rotated[row - 1][column - 1]==null}" th:href="@{/playground/add/{row}/{column}(row=${row - 1},column=${column - 1})}">
+            <label>Put</label>
+        </a>
+          <a th:if="${rotated[row - 1][column - 1]!=null}" th:href="@{/playground/remove/{row}/{column}(row=${row - 1},column=${column - 1})}">
+<!--              <img th:class="${rotated[row - 1][column - 1].isRotated()} ? rotated :'' " th:src="${field[row - 1][column - 1]}" alt="image">-->
+              <img th:class="${rotated[row - 1][column - 1].isRotated()} ? rotated :'' " th:src="${rotated[row - 1][column - 1].getPath()}" alt="image">
+          </a>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+
+
+</body>
+</html>

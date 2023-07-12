@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="../Style/style.css">
+    <meta charset="UTF-8">
+    <title>Field</title>
+
+    <style>
+        .rotated {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+          body {
+              margin: auto;
+              width: 640px;
+              padding: 50px;
+              font-family: "Andale Mono", monospace;
+              color: #2E475D;
+              box-sizing: border-box;
+
+          }
+        /* Table Styles */
+        /*table {*/
+        /*    width: 100%;*/
+        /*    border-collapse: collapse;*/
+        /*}*/
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        /*table, th, td{*/
+        /*    border: 1px solid;*/
+        /*}*/
+
+    </style>
+</head>
+<body>
+<table>
+    <tbody>
+    <tr th:each="row : ${#numbers.sequence(1, y)}">
+        <td th:each="column : ${#numbers.sequence(1, x)}">
+            <a th:href="@{/playground/setElect/{pazzleNum}(num=${num}, pazzleNum=${pazzles.get((row - 1)*x+column - 1).getNumber()})}">
+<!--                <img th:src="@{${'/Images/Pieces/piece'+((row - 1)*x+column) + '.png'}}" alt="image">-->
+                    <img th:class="${pazzles.get((row - 1)*x+column - 1).isRotated()} ? rotated :'' " th:if="${!pazzles.get((row - 1)*x+column - 1).isUsed()}" th:src="@{${pazzles.get((row - 1)*x+column - 1).getPath()}}" alt="image">
+                    <label th:if="${pazzles.get((row - 1)*x+column - 1).getElect()}">Selected</label>
+            </a>
+        </td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+
+</body>
+</html>
