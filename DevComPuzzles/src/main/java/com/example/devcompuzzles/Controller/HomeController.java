@@ -19,7 +19,6 @@ import java.io.IOException;
 public class HomeController {
 
 
-    static int k;
     FieldController fieldController;
 
     @Autowired
@@ -35,21 +34,22 @@ public class HomeController {
 
     @PostMapping({"/","/home/"})
     public String homePage(@ModelAttribute("level") Level level, Model model) throws IOException {
+        FieldController.field = null;
         File file;
         for(int i = 1; i<=20; ++i){
             file = new File("src/main/resources/static/Images/Pieces/piece"+i+  ".png");
-            if(file!=null){
-                file.delete();
-            }
+            file.delete();
+
         }
         int k;
         if(level.getDifficulty()==Difficulty.LOW)
             k = 9;
         else if (level.getDifficulty()==Difficulty.MEDIUM)
             k = 12;
-        else k = 20;
-        PazzlesController.pazzles = PazzlesController.splitImage("/Users/olegmisialo/Desktop/DevComTask/DevComPuzzles/src/main/resources/static/Images/", "picture.png", k);
-        FieldController.field = null;
+        else
+            k = 20;
+        PazzlesController.pazzles = PazzlesController.splitImage("/Users/olegmisialo/Desktop/DevComTask/DevComTestTask/DevComPuzzles/src/main/resources/static/Images/", "picture.png", k);
+
 
         return "redirect:/playground/"+k;
     }

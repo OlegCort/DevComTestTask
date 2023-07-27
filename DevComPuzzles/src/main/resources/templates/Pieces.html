@@ -22,11 +22,6 @@
               box-sizing: border-box;
 
           }
-        /* Table Styles */
-        /*table {*/
-        /*    width: 100%;*/
-        /*    border-collapse: collapse;*/
-        /*}*/
 
         th, td {
             padding: 8px;
@@ -50,9 +45,6 @@
         a:hover {
             text-decoration: underline;
         }
-        /*table, th, td{*/
-        /*    border: 1px solid;*/
-        /*}*/
 
     </style>
 </head>
@@ -62,7 +54,6 @@
     <tr th:each="row : ${#numbers.sequence(1, y)}">
         <td th:each="column : ${#numbers.sequence(1, x)}">
             <a th:href="@{/playground/setElect/{pazzleNum}(num=${num}, pazzleNum=${pazzles.get((row - 1)*x+column - 1).getNumber()})}">
-<!--                <img th:src="@{${'/Images/Pieces/piece'+((row - 1)*x+column) + '.png'}}" alt="image">-->
                     <img th:class="${pazzles.get((row - 1)*x+column - 1).isRotated()} ? rotated :'' " th:if="${!pazzles.get((row - 1)*x+column - 1).isUsed()}" th:src="@{${pazzles.get((row - 1)*x+column - 1).getPath()}}" alt="image">
                     <label th:if="${pazzles.get((row - 1)*x+column - 1).getElect()}">Selected</label>
             </a>

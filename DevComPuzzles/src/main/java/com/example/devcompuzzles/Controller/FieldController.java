@@ -1,5 +1,7 @@
 package com.example.devcompuzzles.Controller;
 
+import com.example.devcompuzzles.Algorithm.Puzzle;
+import com.example.devcompuzzles.Algorithm.PuzzleController;
 import com.example.devcompuzzles.Model.Pazzle;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +38,6 @@ public class FieldController {
 
         if(field==null) {
             field = new Pazzle[rows][columns];
-
 
             Random rand = new Random();
             int upperbound = k;
@@ -113,6 +114,35 @@ public class FieldController {
     public String rotate() throws IOException {
         PazzlesController.rotatePazzle();
         return "redirect:/playground/" + rows*columns;
+    }
+
+    @GetMapping("/finish")
+    public String finish(){
+        PuzzleController puzzleController = new PuzzleController();
+        for(Pazzle pazzle: pazzles){
+            puzzleController.addPuzzle(pazzle.getImage(), pazzle.getNumber());
+        }
+        try {
+            puzzleController.buildPuzzle();
+        }
+        catch (Exception e){
+            System.out.println("Catched exception: " + e.getMessage());
+            return "redirect:/playground/" + rows*columns;
+        }
+        int[][] field1 = puzzleController.getField();
+        System.out.println(field.length);
+        System.out.println(field[0].length);
+        for(int i = 0; i< field.length; ++i){
+            for(int j = 0; j<field[0].length; ++j){
+                Pazzle pazzle = PazzlesController.getByNum(field1[i][j]);
+                field[i][j] = pazzle;
+                pazzle.setUsed(true);
+                pazzle.setElect(false);
+                pazzle.setRotated(false);
+            }
+        }
+        return "redirect:/playground/" + rows*columns;
+
     }
 
 
